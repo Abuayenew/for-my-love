@@ -6,51 +6,60 @@
     <title>For My Love Rediet</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans+Ethiopic:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --choco-brown: #5e3023;
+        }
+
         body {
+            margin: 0;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            /* Chocolate and Roses Theme */
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://images.unsplash.com/photo-1548849015-d9969a1f0388?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+            /* Romantic deep gradient */
+            background: linear-gradient(-45deg, #700d1f, #c9184a, #5e3023, #ff758f);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             font-family: 'Noto Sans Ethiopic', sans-serif;
-            text-align: center;
             overflow: hidden;
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(5px);
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(139, 69, 19, 0.5);
-            border: 3px solid #8b4513;
-            max-width: 400px;
-            position: relative;
-            z-index: 2;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* PHOTO STYLE */
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 85%;
+            z-index: 10;
+        }
+
         #herPic {
-            width: 220px;
-            height: 220px;
+            width: 180px;
+            height: 180px;
             object-fit: cover;
-            border-radius: 20px; /* Square with soft corners look */
-            border: 5px solid #ff1493;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
             margin-bottom: 20px;
-            transition: transform 0.5s;
         }
 
         h1 {
-            color: #4b2c20;
+            color: white;
             font-size: 24px;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            margin-bottom: 35px;
         }
 
         .buttons {
@@ -58,6 +67,7 @@
             justify-content: center;
             gap: 20px;
             height: 60px;
+            position: relative;
         }
 
         button {
@@ -65,45 +75,39 @@
             font-size: 18px;
             font-weight: bold;
             border: none;
-            border-radius: 15px;
+            border-radius: 50px;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        #yesBtn { background: #ff1493; color: white; }
-        #noBtn { background: #8b4513; color: white; position: absolute; }
+        #yesBtn { background: #ff1493; color: white; box-shadow: 0 5px 15px rgba(255,20,147,0.4); }
+        #noBtn { background: #3d1f16; color: white; position: absolute; }
+
+        /* MULTI-COLOR HEARTS STYLE */
+        .bg-heart {
+            position: absolute;
+            z-index: 1;
+            animation: float Up 7s infinite linear;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
 
         #haileMsg {
             display: none;
+            color: white;
+            animation: fadeIn 1.5s;
+        }
+
+        .haile-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 28px;
-            color: #d63384;
-            margin-top: 20px;
-        }
-
-        /* Floating Hearts Animation */
-        .heart {
-            position: fixed;
-            top: -10vh;
-            font-size: 2rem;
-            color: #ff1493;
-            user-select: none;
-            z-index: 1;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(110vh) translateX(20px); opacity: 0; }
-        }
-
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.7);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
+            font-size: 32px;
+            color: #ffd700; /* Gold for extra "pop" */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
     </style>
 </head>
@@ -111,61 +115,62 @@
 
     <audio id="loveSong" loop>
         <source src="thinkingoutloud.mp3" type="audio/mpeg">
-        </audio>
-    <div class="container">
-        <img src="Rediet.jpg" alt="Rediet" id="herPic">
-        
-        <h1 id="mainQuestion">የእኔ ፍቅር ረድዬ ሰሞኑን አንገናኝም እ ስዎድሽ</h1>
+    </audio>
 
+    <div class="container">
+        <img src="rediet.jpg" alt="Rediet" id="herPic">
+        <h1 id="mainQuestion">የእኔ ፍቅር ረድዬ ሰሞኑን አንገናኝም እ ስዎድሽ</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="celebrate()">እሺ</button>
             <button id="noBtn" onmouseover="moveButton()">አልፈልግም</button>
         </div>
-        
         <div id="haileMsg">
-            <p>እኮ በ እኔማ አትጨቅኝም ❤️</p>
-            <hr>
-            <p style="font-size: 35px;">Haile Loves you soo much My Love</p>
+            <p style="font-size: 22px;">እኮ በ እኔማ አትጨቅኝም ❤️</p>
+            <p class="haile-text">Haile Loves you soo much My Love</p>
         </div>
     </div>
 
     <script>
+        // FUNCTION TO CREATE MULTI-COLOR HEARTS
+        function createHeart() {
+            const heart = document.createElement('div');
+            const colors = ['#ff4d6d', '#ff758f', '#fff', '#ffb3c1', '#ffd700', '#ff0000'];
+            
+            heart.className = 'bg-heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            heart.style.fontSize = Math.random() * 25 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.opacity = Math.random();
+            
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        // Start creating hearts
+        setInterval(createHeart, 400);
+
         const song = document.getElementById('loveSong');
 
         function moveButton() {
+            const noBtn = document.getElementById('noBtn');
             const x = Math.random() * (window.innerWidth - 150);
             const y = Math.random() * (window.innerHeight - 100);
-            const noBtn = document.getElementById('noBtn');
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
             noBtn.style.position = 'fixed';
-            
-            // Try to play music when she interacts (browser requirement)
             song.play();
         }
 
         function celebrate() {
-            song.play(); // Play music on click
+            song.play();
             document.getElementById('mainQuestion').style.display = 'none';
-            document.getElementById('noBtn').style.display = 'none';
-            document.getElementById('yesBtn').style.display = 'none';
+            document.querySelector('.buttons').style.display = 'none';
             document.getElementById('haileMsg').style.display = 'block';
             
-            // Change her photo to a different one if you want
-            // document.getElementById('herPic').src = "photo_after_yes.jpg";
-            
-            // Start heart rain
-            setInterval(createHeart, 300);
-        }
-
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
+            // Speed up hearts for celebration
+            setInterval(createHeart, 100);
         }
     </script>
 </body>
