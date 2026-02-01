@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love Rediet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans+Ethiopic:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            /* Chocolate and Roses Theme */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1548849015-d9969a1f0388?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Noto Sans Ethiopic', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(139, 69, 19, 0.5);
+            border: 3px solid #8b4513;
+            max-width: 400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* PHOTO STYLE */
+        #herPic {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px; /* Square with soft corners look */
+            border: 5px solid #ff1493;
+            margin-bottom: 20px;
+            transition: transform 0.5s;
+        }
+
+        h1 {
+            color: #4b2c20;
+            font-size: 24px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 60px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yesBtn { background: #ff1493; color: white; }
+        #noBtn { background: #8b4513; color: white; position: absolute; }
+
+        #haileMsg {
+            display: none;
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: #d63384;
+            margin-top: 20px;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            top: -10vh;
+            font-size: 2rem;
+            color: #ff1493;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) translateX(20px); opacity: 0; }
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.7);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="loveSong" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+
+    <div class="container">
+        <img src="Rediet.jpg" alt="Rediet" id="herPic">
+        
+        <h1 id="mainQuestion">የእኔ ፍቅር ረድዬ ሰሞኑን አንገናኝም እ ስዎድሽ</h1>
+
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">እሺ</button>
+            <button id="noBtn" onmouseover="moveButton()">አልፈልግም</button>
+        </div>
+        
+        <div id="haileMsg">
+            <p>እኮ በ እኔማ አትጨቅኝም ❤️</p>
+            <hr>
+            <p style="font-size: 35px;">Haile Loves you soo much My Love</p>
+        </div>
+    </div>
+
+    <script>
+        const song = document.getElementById('loveSong');
+
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 100);
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            noBtn.style.position = 'fixed';
+            
+            // Try to play music when she interacts (browser requirement)
+            song.play();
+        }
+
+        function celebrate() {
+            song.play(); // Play music on click
+            document.getElementById('mainQuestion').style.display = 'none';
+            document.getElementById('noBtn').style.display = 'none';
+            document.getElementById('yesBtn').style.display = 'none';
+            document.getElementById('haileMsg').style.display = 'block';
+            
+            // Change her photo to a different one if you want
+            // document.getElementById('herPic').src = "photo_after_yes.jpg";
+            
+            // Start heart rain
+            setInterval(createHeart, 300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+    </script>
+</body>
+</html>
